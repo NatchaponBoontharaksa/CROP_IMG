@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -24,15 +25,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button mBrowse = findViewById(R.id.Browse);
+        Button mList_btn = findViewById(R.id.list_btn);
+        ImageButton mCamera_btn = findViewById(R.id.camera_btn);
+        ImageButton mGallery_btn = findViewById(R.id.gallery_btn);
         Img = findViewById(R.id.imageView);
 
-        mBrowse.setOnClickListener(new View.OnClickListener() {
+        mList_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        mGallery_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pickFromGallery();
             }
         });
+
+        mCamera_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
     }
 
     private void pickFromGallery() {
