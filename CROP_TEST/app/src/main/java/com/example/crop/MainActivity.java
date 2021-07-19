@@ -1,6 +1,9 @@
 package com.example.crop;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
@@ -11,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button mList_btn = findViewById(R.id.list_btn);
+        ImageButton mCamera_btn = findViewById(R.id.camera_btn);
+        ImageButton mGallery_btn = findViewById(R.id.gallery_btn);
+        Img = findViewById(R.id.imageView);
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -43,16 +53,12 @@ public class MainActivity extends AppCompatActivity {
         }else {
 
         }
-        setContentView(R.layout.activity_main);
-        Button mList_btn = findViewById(R.id.list_btn);
-        ImageButton mCamera_btn = findViewById(R.id.camera_btn);
-        ImageButton mGallery_btn = findViewById(R.id.gallery_btn);
-        Img = findViewById(R.id.imageView);
 
         mList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -75,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void openCamera() throws IOException {
         ContentValues values = new ContentValues();
