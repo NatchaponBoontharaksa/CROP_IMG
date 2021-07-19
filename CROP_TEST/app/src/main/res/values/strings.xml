@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CROP</string>
+    <string name="gallery_str">GALLERY</string>
+    <string name="camera_str">CAMERA</string>
 </resources>
