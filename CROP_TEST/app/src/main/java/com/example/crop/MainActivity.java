@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Button mList_btn = findViewById(R.id.list_btn);
         ImageButton mCamera_btn = findViewById(R.id.camera_btn);
         ImageButton mGallery_btn = findViewById(R.id.gallery_btn);
+        ImageButton mCrop_btn = findViewById(R.id.crop_btn);
         Img = findViewById(R.id.imageView);
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -80,6 +82,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mCrop_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageUri != null){
+                    startActivity();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "PLEASE ADD IMAGE", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
 
@@ -102,9 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startActivity(){
-        CropImage.activity()
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .start(this);
+        CropImage.activity(imageUri).start(MainActivity.this);
     }
 
     private void requestCameraPermission() {
@@ -124,14 +136,18 @@ public class MainActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
-                Img.setImageURI(resultUri);
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                intent.putExtra("uri", imageUri);
+                startActivity(intent);
+//                Img.setImageURI(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
         } else if (requestCode == GALLERY_REQ_CODE && resultCode == Activity.RESULT_OK){
             Uri resultUri;
             resultUri = data.getData();
-            Img.setImageURI(resultUri);
+            imageUri = resultUri;
+            Img.setImageURI(imageUri);
 //            CropImage.activity(imageUri).start(this);
         } else if (requestCode == CAMERA_REQ_CODE && resultCode == Activity.RESULT_OK){
 //            Uri resultUri;

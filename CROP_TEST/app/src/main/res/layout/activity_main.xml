@@ -36,14 +36,16 @@
 
             <Button
                 android:id="@+id/list_btn"
-                android:layout_width="123dp"
-                android:layout_height="79dp"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                android:layout_toEndOf="@+id/crop_btn"
                 android:text="@string/list_str"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +57,7 @@
                 android:layout_height="70dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="28dp"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="19dp"
                 tools:layout_editor_absoluteX="25dp"
                 tools:layout_editor_absoluteY="662dp"
@@ -66,10 +68,20 @@
                 android:layout_width="64dp"
                 android:layout_height="70dp"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="28dp"
+                android:layout_marginStart="14dp"
                 android:layout_marginTop="19dp"
                 android:layout_toEndOf="@+id/camera_btn"
                 app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <ImageButton
+                android:id="@+id/crop_btn"
+                android:layout_width="64dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="19dp"
+                android:layout_toEndOf="@+id/gallery_btn"
+                app:srcCompat="@android:drawable/ic_menu_crop" />
 
         </RelativeLayout>
 
