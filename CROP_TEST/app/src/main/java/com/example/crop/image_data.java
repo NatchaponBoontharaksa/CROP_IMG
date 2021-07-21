@@ -10,7 +10,7 @@ public class image_data implements Serializable {
 
     public image_data(String imgURL, String imgCropURL, String FileName) {
         this.imgURL = imgURL;
-        this.imgCropURL[imgCropURL.length()] = imgCropURL;
+        this.imgCropURL = new String[]{imgCropURL};
         this.FileName = FileName;
     }
 
@@ -27,7 +27,7 @@ public class image_data implements Serializable {
     }
 
     public void setImgCropURL(String URL) {
-        this.imgCropURL[imgCropURL.length() + 1] = URL;
+        this.imgCropURL[imgCropURL.length] = URL;
     }
 
     public String getFileName() {

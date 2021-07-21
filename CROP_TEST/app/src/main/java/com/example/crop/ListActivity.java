@@ -20,8 +20,9 @@ public class ListActivity extends AppCompatActivity {
 
     ListView mListView;
     Uri imageCropUri;
-    image_data tmp_crop_img;
+
     ArrayList<image_data> imageList = new ArrayList<>();
+    image_data img_Obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +36,12 @@ public class ListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
+        img_Obj = (image_data)intent.getSerializableExtra("imgObj");
 
+        imageList.add(img_Obj);
+        imageListAdapter adapter = new imageListAdapter(this, R.layout.img_list, imageList);
 
-
+        mListView.setAdapter(adapter);
     }
 
     @Override

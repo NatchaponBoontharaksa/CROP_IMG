@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,8 +38,12 @@ public class MainActivity extends AppCompatActivity {
     String cameraPermission[];
     String storagePermission[];
 
+    image_data tmp_crop_img;
+
+
     Uri imageUri;
     ImageView Img;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,8 +144,10 @@ public class MainActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
+                tmp_crop_img = new image_data(imageUri.toString(), resultUri.toString(), "image");
+
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                intent.putExtra("uri", imageUri);
+                intent.putExtra("imgObj", tmp_crop_img);
                 startActivity(intent);
 //                Img.setImageURI(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
