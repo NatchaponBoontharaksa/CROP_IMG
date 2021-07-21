@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int CAMERA_REQ_CODE = 42;
     private static final int GALLERY_REQ_CODE = 44;
 
+    private static final String TAG = "MainActivity";
+
     String cameraPermission[];
     String storagePermission[];
 

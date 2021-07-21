@@ -7,13 +7,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
 
+    private static final String TAG = "ListActivity";
+
     ListView mListView;
     Uri imageCropUri;
+    image_data tmp_crop_img;
+    ArrayList<image_data> imageList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +35,6 @@ public class ListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        imageCropUri = (Uri) intent.getSerializableExtra("uri");
 
 
 

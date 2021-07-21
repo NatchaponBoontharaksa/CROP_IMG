@@ -5,10 +5,12 @@ import java.io.Serializable;
 public class image_data implements Serializable {
 
     private String imgURL;
+    private String[] imgCropURL;
     private String FileName;
 
-    public image_data(String imgURL, String FileName) {
+    public image_data(String imgURL, String imgCropURL, String FileName) {
         this.imgURL = imgURL;
+        this.imgCropURL[imgCropURL.length()] = imgCropURL;
         this.FileName = FileName;
     }
 
@@ -16,8 +18,16 @@ public class image_data implements Serializable {
         return imgURL;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setImgURL(String URL) {
+        this.imgURL = URL;
+    }
+
+    public String getImgCropURL(int index) {
+        return imgCropURL[index];
+    }
+
+    public void setImgCropURL(String URL) {
+        this.imgCropURL[imgCropURL.length() + 1] = URL;
     }
 
     public String getFileName() {
