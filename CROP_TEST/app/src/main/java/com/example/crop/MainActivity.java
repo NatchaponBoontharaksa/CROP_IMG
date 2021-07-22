@@ -140,6 +140,21 @@ public class MainActivity extends AppCompatActivity {
         return result && result1;
     }
 
+    // Is source image is in list?
+    // if source image is in the list -> Add uri of crop image to array of cropimage URL;
+    private void checkExistImg(Uri cropUri){
+        for (image_data obj:imageList
+             ) {
+            if (obj.getImgURL().equals(imageUri.toString())){
+                obj.setImgCropURL(cropUri.toString());
+            } else {
+                tmp_crop_img = new image_data(imageUri.toString(), "image");
+                tmp_crop_img.setImgCropURL(cropUri.toString());
+                imageList.add(tmp_crop_img);
+            }
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -148,8 +163,16 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 Bundle bundle = new Bundle();
-                tmp_crop_img = new image_data(imageUri.toString(), resultUri.toString(), "image");
-                imageList.add(tmp_crop_img);
+                if (!imageList.isEmpty()){
+                    checkExistImg(resultUri);
+                } else {
+                    // if imageList is empty
+                    tmp_crop_img = new image_data(imageUri.toString(),  "image");
+                    tmp_crop_img.setImgCropURL(resultUri.toString());
+                    imageList.add(tmp_crop_img);
+                }
+//                tmp_crop_img = new image_data(imageUri.toString(), resultUri.toString(), "image");
+
                 bundle.putSerializable("imageList", imageList);
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
                 intent.putExtras(bundle);

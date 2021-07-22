@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,6 +48,18 @@ public class ListActivity extends AppCompatActivity {
 
 
         mListView.setAdapter(adapter);
+
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ArrayList<String> cropURL = imageList.get(position).getImgCropURL();
+                for(int cnt = 0; cnt < cropURL.size(); cnt++){
+                    Log.d(TAG, cropURL.get(cnt));
+                }
+
+            }
+        });
     }
 
     @Override

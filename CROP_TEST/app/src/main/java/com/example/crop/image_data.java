@@ -1,16 +1,17 @@
 package com.example.crop;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class image_data implements Serializable {
 
     private String imgURL;
-    private String[] imgCropURL;
+    private ArrayList<String> imgCropURL;
     private String FileName;
 
-    public image_data(String imgURL, String imgCropURL, String FileName) {
+    public image_data(String imgURL, String FileName) {
         this.imgURL = imgURL;
-        this.imgCropURL = new String[]{imgCropURL};
+        this.imgCropURL = new ArrayList<>();
         this.FileName = FileName;
     }
 
@@ -22,12 +23,12 @@ public class image_data implements Serializable {
         this.imgURL = URL;
     }
 
-    public String getImgCropURL(int index) {
-        return imgCropURL[index];
+    public ArrayList<String> getImgCropURL() {
+        return imgCropURL;
     }
 
     public void setImgCropURL(String URL) {
-        this.imgCropURL[imgCropURL.length] = URL;
+        this.imgCropURL.add(URL);
     }
 
     public String getFileName() {
