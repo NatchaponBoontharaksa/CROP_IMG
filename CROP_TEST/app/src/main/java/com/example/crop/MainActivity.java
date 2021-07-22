@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     String storagePermission[];
 
     image_data tmp_crop_img;
-
+    ArrayList<image_data> imageList = new ArrayList<>();
 
     Uri imageUri;
     ImageView Img;
@@ -67,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
         mList_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                bundle.putSerializable("imageList", imageList);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -144,10 +147,13 @@ public class MainActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
+                Bundle bundle = new Bundle();
                 tmp_crop_img = new image_data(imageUri.toString(), resultUri.toString(), "image");
-
+                imageList.add(tmp_crop_img);
+                bundle.putSerializable("imageList", imageList);
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                intent.putExtra("imgObj", tmp_crop_img);
+                intent.putExtras(bundle);
+//                intent.putExtra("imgObj", tmp_crop_img);
                 startActivity(intent);
 //                Img.setImageURI(resultUri);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

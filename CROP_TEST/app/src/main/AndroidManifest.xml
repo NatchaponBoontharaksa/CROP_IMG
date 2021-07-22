@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CROP">
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
