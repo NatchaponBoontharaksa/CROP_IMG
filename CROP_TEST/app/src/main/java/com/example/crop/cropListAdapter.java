@@ -19,20 +19,19 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
 
-public class imageListAdapter extends ArrayAdapter<image_data> {
+public class cropListAdapter extends ArrayAdapter<String> {
 
-    private static final String TAG = "imageListAdapter";
+    private static final String TAG = "cropListAdapter";
 
     private Context mContext;
     private int mResource;
     private int lastPosition = -1;
 
-    static class ViewHolder {
-        TextView imageName;
-        ImageView image;
+    private static class ViewHolder {
+        ImageView cropImage;
     }
 
-    public imageListAdapter(Context context, int resource, ArrayList<image_data> objects) {
+    public cropListAdapter(Context context, int resource, ArrayList<String> objects) {
         super(context, resource, objects);
         mContext = context;
         mResource = resource;
@@ -46,29 +45,26 @@ public class imageListAdapter extends ArrayAdapter<image_data> {
         setupImageLoader();
 
         //get the persons information
-        String imgName = getItem(position).getFileName();
-        String imgUri = getItem(position).getImgURL();
+//        String imgName = getItem(position).getFileName();
+//        String imgUri = getItem(position).getImgURL();
+
+        String imgUri = getItem(position);
 
         //create the view result for showing the animation
         final View result;
-
-        //ViewHolder object
         ViewHolder holder;
-
-
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
-            holder= new ViewHolder();
-            holder.imageName = (TextView) convertView.findViewById(R.id.imgName);
-            holder.image = (ImageView) convertView.findViewById(R.id.imageShow);
+            holder= new cropListAdapter.ViewHolder();
+            holder.cropImage = (ImageView) convertView.findViewById(R.id.cropShow);
 
             result = convertView;
 
             convertView.setTag(holder);
         }
         else{
-            holder = (ViewHolder) convertView.getTag();
+            holder = (cropListAdapter.ViewHolder) convertView.getTag();
             result = convertView;
         }
 
@@ -78,7 +74,7 @@ public class imageListAdapter extends ArrayAdapter<image_data> {
 //        result.startAnimation(animation);
 //        lastPosition = position;
 
-        holder.imageName.setText(imgName);
+//        holder.imageName.setText(imgName);
 
         //create the imageloader object
         ImageLoader imageLoader = ImageLoader.getInstance();
@@ -93,7 +89,7 @@ public class imageListAdapter extends ArrayAdapter<image_data> {
                 .showImageOnLoading(defaultImage).build();
 
         //download and display image from url
-        imageLoader.displayImage(imgUri, holder.image, options);
+        imageLoader.displayImage(imgUri, holder.cropImage, options);
 
         return convertView;
     }

@@ -21,10 +21,8 @@ public class ListActivity extends AppCompatActivity {
     private static final String TAG = "ListActivity";
 
     ListView mListView;
-    Uri imageCropUri;
 
     ArrayList<image_data> imageList = new ArrayList<>();
-    image_data img_Obj;
     imageListAdapter adapter;
 
     @Override
@@ -54,9 +52,14 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ArrayList<String> cropURL = imageList.get(position).getImgCropURL();
-                for(int cnt = 0; cnt < cropURL.size(); cnt++){
-                    Log.d(TAG, cropURL.get(cnt));
-                }
+//                for(String url: cropURL){
+//                    Log.d(TAG, url);
+//                }
+                Bundle cropBundle = new Bundle();
+                cropBundle.putStringArrayList("cropList", cropURL);
+                Intent cropIntent = new Intent(ListActivity.this, CropList.class);
+                cropIntent.putExtras(cropBundle);
+                startActivity(cropIntent);
 
             }
         });
