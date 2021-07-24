@@ -1,6 +1,7 @@
 package com.example.crop;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +28,7 @@ public class cropListAdapter extends ArrayAdapter<String> {
     private int mResource;
     private int lastPosition = -1;
 
-    private static class ViewHolder {
-        ImageView cropImage;
-    }
+    ImageView cropImage;
 
     public cropListAdapter(Context context, int resource, ArrayList<String> objects) {
         super(context, resource, objects);
@@ -50,22 +49,22 @@ public class cropListAdapter extends ArrayAdapter<String> {
 
         String imgUri = getItem(position);
 
+
         //create the view result for showing the animation
         final View result;
-        ViewHolder holder;
+
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(mContext);
             convertView = inflater.inflate(mResource, parent, false);
-            holder= new cropListAdapter.ViewHolder();
-            holder.cropImage = (ImageView) convertView.findViewById(R.id.cropShow);
+            cropImage = (ImageView) convertView.findViewById(R.id.cropShow);
 
             result = convertView;
 
-            convertView.setTag(holder);
+//            convertView.setTag(holder);
         }
         else{
-            holder = (cropListAdapter.ViewHolder) convertView.getTag();
-            result = convertView;
+//            holder = (cropListAdapter.ViewHolder) convertView.getTag();
+//            result = convertView;
         }
 
 
@@ -89,7 +88,8 @@ public class cropListAdapter extends ArrayAdapter<String> {
                 .showImageOnLoading(defaultImage).build();
 
         //download and display image from url
-        imageLoader.displayImage(imgUri, holder.cropImage, options);
+//        imageLoader.displayImage(imgUri, cropImage, options);
+        cropImage.setImageURI(Uri.parse(imgUri));
 
         return convertView;
     }

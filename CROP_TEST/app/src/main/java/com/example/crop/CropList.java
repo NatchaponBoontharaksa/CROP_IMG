@@ -43,11 +43,10 @@ public class CropList extends AppCompatActivity {
             for (String url: cropURL) {
                 Log.d(TAG, url);
             }
-//            cropAdapter = new cropListAdapter(this, R.layout.activity_crop_list, cropURL);
+            cropAdapter = new cropListAdapter(this, R.layout.crop_list, cropURL);
         }
 
-//        mCropList.setAdapter(cropAdapter);
-
+        mCropList.setAdapter(cropAdapter);
 
     }
 
