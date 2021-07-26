@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -143,15 +144,23 @@ public class MainActivity extends AppCompatActivity {
     // Is source image is in list?
     // if source image is in the list -> Add uri of crop image to array of cropimage URL;
     private void checkExistImg(Uri cropUri){
-        for (image_data obj:imageList
-             ) {
-            if (obj.getImgURL().equals(imageUri.toString())){
-                obj.setImgCropURL(cropUri.toString());
+        int ListSize = imageList.size();
+        boolean addListFlg = false;
+        for (int cnt = 0; cnt < ListSize; cnt++) {
+            Log.d(TAG, "imageList: " + imageList.get(cnt).getImgURL());
+            Log.d(TAG, "imageURI: " + imageUri.toString());
+            if (imageList.get(cnt).getImgURL().equals(imageUri.toString())){
+                imageList.get(cnt).setImgCropURL(cropUri.toString());
+                addListFlg = false;
             } else {
-                tmp_crop_img = new image_data(imageUri.toString(), "image");
-                tmp_crop_img.setImgCropURL(cropUri.toString());
-                imageList.add(tmp_crop_img);
+                addListFlg = true;
             }
+        }
+
+        if (addListFlg == true) {
+            image_data tmp_crop = new image_data(imageUri.toString(), "image");
+            tmp_crop.setImgCropURL(cropUri.toString());
+            imageList.add(tmp_crop);
         }
     }
 
