@@ -11,10 +11,12 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +28,10 @@ import android.widget.Toast;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -141,17 +145,31 @@ public class MainActivity extends AppCompatActivity {
         return result && result1;
     }
 
+    private String getNameFromURI(Uri uri) {
+        Cursor c = getContentResolver().query(uri, null, null, null, null);
+        c.moveToFirst();
+        return c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+    }
+
     // Is source image is in list?
     // if source image is in the list -> Add uri of crop image to array of cropimage URL;
     private void checkExistImg(Uri cropUri){
         int ListSize = imageList.size();
         boolean addListFlg = false;
+        Uri tmp_uri;
+
+        String newImageName = getNameFromURI(imageUri);
+        String ListImageName;
+
         for (int cnt = 0; cnt < ListSize; cnt++) {
-            Log.d(TAG, "imageList: " + imageList.get(cnt).getImgURL());
-            Log.d(TAG, "imageURI: " + imageUri.toString());
-            if (imageList.get(cnt).getImgURL().equals(imageUri.toString())){
+            tmp_uri = Uri.parse(imageList.get(cnt).getImgURL());
+            ListImageName = getNameFromURI(tmp_uri);
+            Log.d(TAG, "ListImageName :" + ListImageName);
+            Log.d(TAG, "newImageName  :" + newImageName);
+            if (ListImageName.equals(newImageName)){
                 imageList.get(cnt).setImgCropURL(cropUri.toString());
                 addListFlg = false;
+                break;
             } else {
                 addListFlg = true;
             }
