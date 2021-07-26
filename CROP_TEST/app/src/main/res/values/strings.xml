@@ -3,4 +3,7 @@
     <string name="gallery_str">GALLERY</string>
     <string name="camera_str">CAMERA</string>
     <string name="list_str">LIST</string>
+    <string name="red_str">RED :</string>
+    <string name="green_str">GREEN :</string>
+    <string name="blue_str">BLUE :</string>
 </resources>

@@ -10,12 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class CropList extends AppCompatActivity {
+public class CropListActivity extends AppCompatActivity {
 
     private static final String TAG = "CropListActivity";
 
@@ -47,6 +49,17 @@ public class CropList extends AppCompatActivity {
         }
 
         mCropList.setAdapter(cropAdapter);
+
+        mCropList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Bundle cropUribundle = new Bundle();
+                cropUribundle.putString("uri_str", cropURL.get(position));
+                Intent resultIntent = new Intent(CropListActivity.this, ResultActivity.class);
+                resultIntent.putExtras(cropUribundle);
+                startActivity(resultIntent);
+            }
+        });
 
     }
 

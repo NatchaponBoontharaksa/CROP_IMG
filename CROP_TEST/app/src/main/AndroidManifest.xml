@@ -13,9 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CROP">
-        <activity android:name=".CropList"
-
-            ></activity>
+        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".CropListActivity" />
         <activity
             android:name=".ListActivity"
             android:launchMode="singleTask" />
